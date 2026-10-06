@@ -1,0 +1,20 @@
+[Unit]
+Description=Java Application Service (simulation)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=java-runner
+ExecStart=/bin/sh -c '/usr/bin/echo "java-app initialized successfully"; /usr/bin/id; exec /usr/bin/sleep infinity'
+Restart=on-failure
+RestartSec=10s
+
+# Basic service hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target
